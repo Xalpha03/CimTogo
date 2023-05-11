@@ -9,12 +9,13 @@ def index_view(request):
     etat_page = False
     try:
         etat_page = True
-        posts_date = request.GET.get('get_date')
-        posts_name = request.GET.get('name_user')
+        if request.method == 'GET':
+            posts_date = request.GET.get('get_date')
+            posts_name = request.GET.get('get_name')
         #posts_name = User.objects.filter(username=posts_name)
         #posts_article = Article.objects.filter(created = get_date).order_by('created').order_by('-id')
         print("=="*5, posts_date, posts_name, "=="*5)
-        posts_livr = Article.objects.filter(Q(created=posts_date)).aggregate(liv=Sum('livraison'))
+        posts_livr = Article.objects.filter(Q(created=posts_date) & Q(name_user=posts_name)).aggregate(liv=Sum('livraison'))
         posts_casse = Article.objects.filter(Q(created=posts_date)).aggregate(cas=Sum('casse'))
         posts_ensache = Article.objects.filter(Q(created=posts_date)).aggregate(ens=(Sum('livraison'))*20)
         posts_tx_casse = Article.objects.filter(created=posts_date).aggregate(tx_cas=Avg('tx_casse'))
