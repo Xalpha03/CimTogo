@@ -1,0 +1,32 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-primary">
+    <div class="container-fluid">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item">
+                    <i class="fas fa-house fa-2x"></i>
+                    <a class="fs-4 text-light" href="{% url 'product:index' %}"> Home</a>
+                </li>
+                {% if user.is_authenticated %}
+                    <li class="breadcrumb-item fs-4">
+                        <a class="fs-4 text-light" href="/details/?id_user={{ user.id }}"><i class="far fa-user"></i> {{ user.username|capfirst }}</a>
+                    </li>
+                {% endif %}
+            </ol>
+        </nav>
+    </div>
+    <div class="me-4">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                {% if user.is_authenticated %}
+                <li class="breadcrumb-item fs-4">
+                    <a class="fs-6 text-light" href="{% url 'users:logout' %}">Deconnexion</a>
+                </li>
+                {% else %}
+                <li class="breadcrumb-item fs-4">
+                    
+                </li>
+                {% endif %}
+            </ol>
+        </nav>
+    </div>
+</nav>
