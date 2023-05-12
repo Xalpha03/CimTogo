@@ -73,7 +73,7 @@ def index_view(request):
 def detail_view(request):
     get_id = request.GET.get('id_user')
     if get_id:
-       posts_article = Article.objects.filter(name_user=get_id)
+       posts_article = Article.objects.filter(name_user=get_id).order_by('-created', '-id')
        print("=="*5, posts_article, "=="*5)
 
     #calcul des sommes de chaque champs en fonction de l'id de l'utilsateur
@@ -100,6 +100,5 @@ def edite_view(request):
     if form.is_valid():
         form.save()
         return redirect('product:index')
-    form = ArticleForm()
             
     return render(request, 'product/edite.html', {'form': form})
