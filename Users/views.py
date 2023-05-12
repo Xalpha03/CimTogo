@@ -43,6 +43,7 @@ def logupView(request):
             email = form.cleaned_data['email']
             pwd1 = form.cleaned_data['pwd1']
             pwd2 = form.cleaned_data['pwd2']
+
             
             user = User.objects.filter(Q(username=name)|Q(email=email))
             if user:
