@@ -6,16 +6,14 @@ from .forms import *
 from django.contrib.auth.models import User
 # Create your views here.
 def index_view(request):
-    etat_page = False
     try:
         etat_page = True
-        if request.method == 'GET':
-            posts_date = request.GET.get('get_date')
-            posts_name = request.GET.get('get_name')
+        posts_date = request.GET.get('get_date')
+        posts_name = request.GET.get('name_user')
         #posts_name = User.objects.filter(username=posts_name)
         #posts_article = Article.objects.filter(created = get_date).order_by('created').order_by('-id')
         print("=="*5, posts_date, posts_name, "=="*5)
-        posts_livr = Article.objects.filter(Q(created=posts_date) & Q(name_user=posts_name)).aggregate(liv=Sum('livraison'))
+        posts_livr = Article.objects.filter(Q(created=posts_date)).aggregate(liv=Sum('livraison'))
         posts_casse = Article.objects.filter(Q(created=posts_date)).aggregate(cas=Sum('casse'))
         posts_ensache = Article.objects.filter(Q(created=posts_date)).aggregate(ens=(Sum('livraison'))*20)
         posts_tx_casse = Article.objects.filter(created=posts_date).aggregate(tx_cas=Avg('tx_casse'))
@@ -74,7 +72,7 @@ def index_view(request):
 def detail_view(request):
     get_id = request.GET.get('id_user')
     if get_id:
-       posts_article = Article.objects.filter(name_user=get_id).order_by('-created')
+       posts_article = Article.objects.filter(name_user=get_id).order_by('-created', '-id')
        print("=="*5, posts_article, "=="*5)
 
     #calcul des sommes de chaque champs en fonction de l'id de l'utilsateur
@@ -100,6 +98,6 @@ def edite_view(request):
     form = ArticleForm(request.POST or None, instance=obj)
     if form.is_valid():
         form.save()
-        form = ArticleForm()
-        return redirect('product:index')    
+        return redirect('product:index')
+    form = ArticleForm()           
     return render(request, 'product/edite.html', {'form': form})

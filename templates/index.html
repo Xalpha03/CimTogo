@@ -1,7 +1,7 @@
 {% extends 'home.html' %}
 {% block content %}
 <div class="container">
-
+    <p class="text-dark text-end mt-3 fs-4">To day is :{% now 'd-m-Y' %} </p>
     {% if etat_page == True %}
     <div class="row row-cols-2 mt-3">
         <div class="col">
@@ -45,10 +45,10 @@
                                                         <input class="form-control" type="date" name="get_date"
                                                             placeholder="Entré une date pour le filtrage">
                                                     </div>
-                                                    <div class="mb-1">
+                                                    <!-- <div class="mb-1">
                                                         <input class="form-control" type="text" name="get_name"
                                                             placeholder="Entré un nom pour le filtrage">
-                                                    </div>
+                                                    </div> -->
                                                     <div class="d-grid gap">
                                                         <button type="submit" class="btn btn-primary">SUBMIT</button>
                                                     </div>
@@ -96,10 +96,10 @@
                                                         <input class="form-control" type="date" name="get_date"
                                                             placeholder="Entré une date pour le filtrage">
                                                     </div>
-                                                    <div class="mb-1">
+                                                    <!-- <div class="mb-1">
                                                         <input class="form-control" type="text" name="get_name"
                                                             placeholder="Entré un nom pour le filtrage">
-                                                    </div>
+                                                    </div> -->
                                                     <div class="d-grid gap">
                                                         <button type="submit" class="btn btn-primary">SUBMIT</button>
                                                     </div>

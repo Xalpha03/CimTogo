@@ -33,7 +33,7 @@ def loginView(request):
 
 def logoutView(request):
     logout(request)
-    return redirect('users:login')
+    return redirect('product:index')
 
 def logupView(request):
     if request.method == 'POST':

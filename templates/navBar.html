@@ -54,10 +54,12 @@
                 {% endif %}
 
             </ul>
-            <form class="d-flex" method="get" action="{% url 'product:index' %}">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
-                <button class="btn btn-outline-light" type="submit">Search</button>
-            </form>
+            {% if user.is_superuser %}
+                <form class="d-flex" method="get" action="#">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="search">
+                    <button class="btn btn-outline-light" type="submit">Search</button>
+                </form>
+            {% endif %}
             <div class="dropdown ms-5">
                 {% if user.is_authenticated %}
                 <a class="dropdown-toggle d-flex align-items-center hidden-arrow" href="#" id="navbarDropdownMenuAvatar"
